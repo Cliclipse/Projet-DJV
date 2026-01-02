@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerRotationTPS : MonoBehaviour
+public class RotationScript : MonoBehaviour
 {
     [SerializeField] private Camera cam;
     [SerializeField] private float rotationSpeed = 720f;

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1ad245e91ba2c44bef1ec4e9194382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 40
   tempsDeVieMax: 5
   damageDone: 1
 --- !u!54 &5820537361678309591

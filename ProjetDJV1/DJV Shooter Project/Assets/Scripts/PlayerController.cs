@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         if (Input.GetKeyDown(shootingKey) && _canShoot)
         {
             Bullet lastBullet = Instantiate(bullet);
-            lastBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            lastBullet.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             lastBullet.transform.eulerAngles = transform.eulerAngles;
     
             bulletsNumberLeft -= 1;
