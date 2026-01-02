@@ -8,12 +8,14 @@ public class Bullet : MonoBehaviour
     
     [SerializeField] private float speed;
     [SerializeField] private float tempsDeVieMax = 5f;
+    [SerializeField] private int damageDone = 1;
  
     //Temps de vie de la balle avant sa disparition pour pas faire laguer en laissant 500 balles dans la scene.
     private IEnumerator PurgeCoroutine()
     {
         yield return new WaitForSeconds(tempsDeVieMax);
         Destroy(this.gameObject);
+        Debug.Log("Bullet destroyed");
     }
     
     void Start()
@@ -26,9 +28,19 @@ public class Bullet : MonoBehaviour
         transform.position += transform.forward * (speed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void AgentHit(IDamageable damageable)
     {
+        damageable.ApplyDamage(damageDone); // Pou
         Debug.Log("boumm");
         //Destroy(gameObject);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent<IDamageable>(out var damageable))
+        {
+            AgentHit(damageable);
+        }
+    }
+    
+    
 }

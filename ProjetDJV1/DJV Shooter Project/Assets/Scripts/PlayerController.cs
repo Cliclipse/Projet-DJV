@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour , IDamageable
 {
     [SerializeField] private float speedAcceleration = 1f;
     [SerializeField] private float jumpForce = 2f;
@@ -94,6 +94,21 @@ public class PlayerController : MonoBehaviour
         _canShoot = true;
 
     }
+
+    private void Death()
+    {
+        Debug.Log("Death");
+    }
+
+    public void ApplyDamage(int value)
+    {
+        _currentHealth -= value;
+        if (_currentHealth <= 0) Death();
+    }
+        
+        
+        
+        
     /*
     private void JumpManager()
     {

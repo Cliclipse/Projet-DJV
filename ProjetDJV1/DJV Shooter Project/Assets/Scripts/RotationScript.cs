@@ -10,7 +10,7 @@ public class PlayerRotationTPS : MonoBehaviour
 
 
         Vector3 camForward = cam.transform.forward;
-        camForward.y = 0f; // IMPORTANT
+        camForward.y = 0f; 
 
 
         if (camForward.sqrMagnitude < 0.001f)
@@ -18,8 +18,6 @@ public class PlayerRotationTPS : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.LookRotation(camForward);
 
-        Debug.DrawRay(transform.position, Vector3.forward * 2f, Color.red);
-        Debug.Log("Target rotation: " + targetRotation.eulerAngles);
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             targetRotation,
