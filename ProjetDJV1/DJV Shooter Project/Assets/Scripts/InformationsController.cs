@@ -20,8 +20,8 @@ public class InformationsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textBullets.text = " Bullets : " + player.bulletsNumberLeft.ToString();
-        textLives.text = " Lives : " + player.currentHealth.ToString();
+        textBullets.text =  player.bulletsNumberLeft.ToString();
+        textLives.text = player.currentHealth.ToString();
 
     }
 }
