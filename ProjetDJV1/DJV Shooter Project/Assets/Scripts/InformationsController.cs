@@ -6,7 +6,9 @@ using UnityEngine;
 public class InformationsController : MonoBehaviour
 {
     [SerializeField] PlayerController player;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI textBullets;
+    [SerializeField] TextMeshProUGUI textLives;
+
     // bon faire le truc qui récup son nombre de balles et l'affiche
     
     // Start is called before the first frame update
@@ -18,7 +20,8 @@ public class InformationsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = player.bulletsNumberLeft.ToString();
+        textBullets.text = " Bullets : " + player.bulletsNumberLeft.ToString();
+        textLives.text = " Lives : " + player.currentHealth.ToString();
 
     }
 }

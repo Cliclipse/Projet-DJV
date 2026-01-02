@@ -22,7 +22,7 @@ public class EnemyIa : MonoBehaviour
             bool hitWall = Physics.Raycast(transform.position + Vector3.up, direction, direction.magnitude);
             if (!hitWall)
             {
-                Bullet lastBullet = Instantiate(bullet , transform.position + Vector3.up, Quaternion.identity);
+                Bullet lastBullet = Instantiate(bullet , transform.position + Vector3.up + Vector3.forward, Quaternion.identity);
                 lastBullet.transform.eulerAngles = transform.eulerAngles;
                 StartCoroutine(CooldownShootingCoroutine());
             }

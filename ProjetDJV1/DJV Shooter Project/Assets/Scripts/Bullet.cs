@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(tempsDeVieMax);
         Destroy(this.gameObject);
-        Debug.Log("Bullet destroyed");
     }
     
     void Start()

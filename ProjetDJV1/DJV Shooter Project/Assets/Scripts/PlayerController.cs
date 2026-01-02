@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour , IDamageable
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     private bool _canShoot;
     private bool _isGrounded;
-    private int _currentHealth;
+    public int currentHealth;
 
     //résidu de quand je voulais faire des sauts mais on ne peut pas en faire avec un character Controller j'ai l'impression
     private void CheckGround()
@@ -102,8 +103,8 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     public void ApplyDamage(int value)
     {
-        _currentHealth -= value;
-        if (_currentHealth <= 0) Death();
+        currentHealth -= value;
+        if (currentHealth <= 0) Death();
     }
         
         
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour , IDamageable
         
         _canShoot = true;
         bulletsNumberLeft = maxBulletsNumber;
-        _currentHealth = maxHealth;
+        currentHealth = maxHealth;
         _characterController = GetComponent<CharacterController>();
         _collider = GetComponentInChildren<CapsuleCollider>();
         
