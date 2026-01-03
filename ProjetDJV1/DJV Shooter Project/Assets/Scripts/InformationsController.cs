@@ -8,6 +8,7 @@ public class InformationsController : MonoBehaviour
     [SerializeField] PlayerController player;
     [SerializeField] TextMeshProUGUI textBullets;
     [SerializeField] TextMeshProUGUI textLives;
+    [SerializeField] TextMeshProUGUI textScore;
 
     // bon faire le truc qui récup son nombre de balles et l'affiche
     
@@ -22,6 +23,7 @@ public class InformationsController : MonoBehaviour
     {
         textBullets.text =  player.bulletsNumberLeft.ToString();
         textLives.text = player.currentHealth.ToString();
+        textScore.text = "Score: " + PlayerController.Score;
 
     }
 }

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour , IDamageable
     [SerializeField] private float reloadingCooldown = 2f;
     [SerializeField] private float shootingCooldown = 0.1f;
 
+    public static int Score = 0;
     
      
     private CharacterController _characterController;
@@ -126,7 +127,7 @@ public class PlayerController : MonoBehaviour , IDamageable
     void Awake()
     {
         //_rb = GetComponentInChildren<Rigidbody>();
-        
+        Score = 0;
         _canShoot = true;
         bulletsNumberLeft = maxBulletsNumber;
         currentHealth = maxHealth;

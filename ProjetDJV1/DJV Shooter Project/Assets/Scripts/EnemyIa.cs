@@ -68,6 +68,7 @@ public class EnemyIa : MonoBehaviour , IDamageable
 
     private void Death()
     {
+        PlayerController.Score += 1;
         //ici faudra rajouter tout ce qui est effet de mort et rajout d'un point au score
         Destroy(this.gameObject);
     }
