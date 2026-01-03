@@ -1,27 +1,38 @@
 using UnityEngine;
 
-public class RotationScript : MonoBehaviour
+
+//Je me suis aidé d'un peu d'IA pour le script de la caméra car j'arrivais pas à en avoir une fonctionnelle et dcp tout était injouable
+public class Camera : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
-    [SerializeField] private float rotationSpeed = 720f;
+    [Header("Sensibilité de la souris")]
+    public float mouseSensitivityX = 300f;
 
-    void Update()
+    [Header("Limites de rotation verticale")]
+    public float minY = -30f;
+    public float maxY = 60f;
+
+    private float rotY = 0f; // rotation horizontale
+
+    void Start()
     {
+        // On lock la souris au centre
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Vector3 angles = transform.eulerAngles;
+        rotY = angles.y;
+    }
+
+    void LateUpdate()
+    {
+        // Lecture de la souris
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivityX * Time.deltaTime;
+
+        rotY += mouseX;
 
 
-        Vector3 camForward = cam.transform.forward;
-        camForward.y = 0f; 
-
-
-        if (camForward.sqrMagnitude < 0.001f)
-            return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(camForward);
-
-        transform.rotation = Quaternion.RotateTowards(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * Time.deltaTime
-        );
+        // Applique la rotation au pivot
+        transform.rotation = Quaternion.Euler(0f , rotY, 0f);
+        
     }
 }
