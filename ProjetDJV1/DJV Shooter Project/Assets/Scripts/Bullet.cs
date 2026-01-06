@@ -30,16 +30,27 @@ public class Bullet : MonoBehaviour
     private void AgentHit(IDamageable damageable)
     {
         damageable.ApplyDamage(damageDone); // Pou
-        Debug.Log("boumm");
-        //Destroy(gameObject);
+        Explode();
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<IDamageable>(out var damageable))
+        IDamageable damageable;
+        if (other.gameObject.TryGetComponent<IDamageable>(out damageable) || other.gameObject.transform.parent.TryGetComponent<IDamageable>(out damageable) )
         {
+            Debug.Log("test1");
             AgentHit(damageable);
         }
+        else
+        {
+            Debug.Log(other);
+            Explode();
+        }
     }
-    
+
+    private void Explode()
+    {
+        Debug.Log("boumm");
+        Destroy(gameObject);
+    }
     
 }

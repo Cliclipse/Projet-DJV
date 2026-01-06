@@ -17,10 +17,12 @@ public class EnnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnCoroutine()
     {
-        yield return new WaitForSeconds(cooldown);
-        EnemyIa ennemy = Instantiate(ennemyPrefab, spawnPositions[Random.Range(0, spawnPositions.Length)], Quaternion.identity);
-        ennemy.playerTransformReference = playerTransformReference;
+        while (true)
+        {
+            yield return new WaitForSeconds(cooldown);
+            EnemyIa ennemy = Instantiate(ennemyPrefab, spawnPositions[Random.Range(0, spawnPositions.Length)], Quaternion.identity);
+            ennemy.playerTransformReference = playerTransformReference;
+        }
     }
-
-
+    
 }
