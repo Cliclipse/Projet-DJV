@@ -15,8 +15,7 @@ public class DeathIA : MonoBehaviour
         float tirage = Random.value;
         if (tirage < shieldDropChance + swordDropChance)
         {
-            Debug.Log("bonus dropped");
-            if (tirage < shieldDropChance) Instantiate(shieldBonus , transform.position , transform.rotation);
+            if (tirage < shieldDropChance) Instantiate(shieldBonus , transform.position + Vector3.up , transform.rotation);
             else Instantiate(swordBonus , transform.position , transform.rotation);
         }
         PlayerController.Score += 1;
