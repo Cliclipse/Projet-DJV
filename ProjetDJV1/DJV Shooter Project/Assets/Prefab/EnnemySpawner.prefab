@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPositions: []
-  ennemyPrefab: {fileID: 7044789354005617918, guid: 30263e540f25e9440a568874ddbd2b08, type: 3}
+  shootingIa: {fileID: 7044789354005617918, guid: 30263e540f25e9440a568874ddbd2b08, type: 3}
+  cacIa: {fileID: 7044789354005617918, guid: 9303d0d64e4f98843968bec9d76cd47f, type: 3}
   cooldown: 2
   playerTransformReference: {fileID: 0}
+  cacIaProba: 0.6

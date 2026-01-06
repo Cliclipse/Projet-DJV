@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour , IDamageable
 
     [SerializeField] private Transform shootingSpot;
     
-    [SerializeField] int maxBulletsNumber = 12;
+    public int maxBulletsNumber = 12;
     public int bulletsNumberLeft;
     
     [SerializeField] private float reloadingCooldown = 2f;

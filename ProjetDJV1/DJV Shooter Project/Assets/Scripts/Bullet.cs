@@ -7,10 +7,12 @@ public class Bullet : MonoBehaviour
     //public Vector3 direction;
     
     [SerializeField] private float speed;
-    [SerializeField] private float tempsDeVieMax = 5f;
+    [SerializeField] private float tempsDeVieMax = 5f;    //Temps de vie de la balle avant sa disparition pour pas faire laguer en laissant 500 balles dans la scene.
+
     [SerializeField] private int damageDone = 1;
+    
+    private bool _oneHitSecurity; //Pour corriger un problème de double dégat
  
-    //Temps de vie de la balle avant sa disparition pour pas faire laguer en laissant 500 balles dans la scene.
     private IEnumerator PurgeCoroutine()
     {
         yield return new WaitForSeconds(tempsDeVieMax);
@@ -19,6 +21,7 @@ public class Bullet : MonoBehaviour
     
     void Start()
     {
+        _oneHitSecurity = true;
         StartCoroutine(PurgeCoroutine());
     }
     
@@ -29,27 +32,23 @@ public class Bullet : MonoBehaviour
 
     private void AgentHit(IDamageable damageable)
     {
-        damageable.ApplyDamage(damageDone); // Pou
+        damageable.ApplyDamage(damageDone); 
         Explode();
     }
     private void OnTriggerEnter(Collider other)
     {
-        IDamageable damageable;
-        if (other.gameObject.TryGetComponent<IDamageable>(out damageable) || other.gameObject.transform.parent.TryGetComponent<IDamageable>(out damageable) )
+        if (_oneHitSecurity)
         {
-            Debug.Log("test1");
-            AgentHit(damageable);
+            _oneHitSecurity = false;
+            IDamageable damageable;
+            if (other.gameObject.TryGetComponent<IDamageable>(out damageable) || other.gameObject.transform.parent.TryGetComponent<IDamageable>(out damageable) ) AgentHit(damageable); //Ici j'ai un bug de bullet mais je trouve pas pk
+            else Explode();
         }
-        else
-        {
-            Debug.Log(other);
-            Explode();
-        }
+
     }
 
     private void Explode()
     {
-        Debug.Log("boumm");
         Destroy(gameObject);
     }
     
