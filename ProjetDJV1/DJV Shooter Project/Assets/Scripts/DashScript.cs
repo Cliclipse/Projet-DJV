@@ -11,6 +11,8 @@ public class DashScript : MonoBehaviour
     [SerializeField] private float dashSpeedThreshhold = 50f;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float dashCooldown = 10f;
+    
+    private InformationsController _canvaPlayer;
 
     private float _previousSpeed;
     private PlayerController _playerController;
@@ -21,6 +23,7 @@ public class DashScript : MonoBehaviour
     {
         _canDash = true;
         _playerController = GetComponent<PlayerController>();
+        _canvaPlayer = GetComponentInChildren<InformationsController>();
     }
     void Update()
     {
@@ -34,6 +37,10 @@ public class DashScript : MonoBehaviour
     {
         _canDash = false;
         _playerController.isDashing = true;
+        _canvaPlayer.isDashing = true;
+        _canvaPlayer.canDash = false;
+
+        
         _previousSpeed = _playerController.speed;
         
         _playerController.speed = dashSpeedThreshhold;
@@ -41,6 +48,8 @@ public class DashScript : MonoBehaviour
         _playerController.speed = _previousSpeed;
         
         _previousSpeed = _playerController.speed;
+        
+        _canvaPlayer.isDashing = false;
         _playerController.isDashing = false;
         StartCoroutine(DashCooldownCoroutine());
     }
@@ -49,5 +58,7 @@ public class DashScript : MonoBehaviour
     {
         yield return new WaitForSeconds(dashCooldown);
         _canDash = true;
+        _canvaPlayer.canDash = true;
+
     }
 }
