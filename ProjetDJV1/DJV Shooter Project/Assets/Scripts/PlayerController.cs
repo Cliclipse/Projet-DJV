@@ -172,7 +172,6 @@ public class PlayerController : MonoBehaviour , IDamageable
     {
         _canShoot = false;
         _canMove = false;
-        Debug.Log("Death");
         //Là faudra que je mette de quoi activer le booleen d'animation de mort ensuite.
         yield return new WaitForSeconds(0.5f);
         Cursor.lockState = CursorLockMode.None;

@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    
+    [SerializeField] RectTransform panel;
+    
     // Start is called before the first frame update
     void Awake()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        panel.gameObject.SetActive(false);
+
     }
     
     public void OnStartGame()
@@ -18,8 +23,12 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Level1Scene");
     }
     
-    public void OnCreditClick()
+    public void OnCommandClick()
     {
-        Debug.Log("Crédits, mais pr le moment j'en ai pas, dommage");
+        panel.gameObject.SetActive(true);
+    }
+    public void OnCommandClosed()
+    {
+        panel.gameObject.SetActive(false);
     }
 }

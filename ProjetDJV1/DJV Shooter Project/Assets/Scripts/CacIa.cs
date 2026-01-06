@@ -7,6 +7,7 @@ public class CacIa : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform hittingSpotSpawnOverlap;
+    private Transform playerTransformReference;
     
     [SerializeField] private float hittingCooldown = 0.3f;
     private EnemyIaCommon _enemyIaCommon;
@@ -21,8 +22,16 @@ public class CacIa : MonoBehaviour
     private void Hitting()
     {
         _canHit = false;
-        animator.SetBool(_isAttackingHash , true); 
- 
+        animator.SetBool(_isAttackingHash , true);
+
+
+        Collider[] hits = Physics.OverlapSphere(transform.position, 1.5f, LayerMask.GetMask("Player"));
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].TryGetComponent<PlayerController>(out var component)) component.ApplyDamage(1);
+        }
+        
+        
         //Et là je fais le process d'attack au cac c'est tout, à faire pour demain
         
         StartCoroutine(AnimationCoroutine());
@@ -46,6 +55,7 @@ public class CacIa : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         _enemyIaCommon = GetComponent<EnemyIaCommon>();
         
         _enemyIaCommon.shouldAttack = false;
